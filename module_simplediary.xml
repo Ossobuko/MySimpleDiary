@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_simplediary" default="compile.module.simplediary">
+  <dirname property="module.simplediary.basedir" file="${ant.file.module_simplediary}"/>
+  
+  <property name="module.jdk.home.simplediary" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.simplediary" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.simplediary" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.simplediary" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="simplediary.output.dir" value="${module.simplediary.basedir}/out/production/SimpleDiary"/>
+  <property name="simplediary.testoutput.dir" value="${module.simplediary.basedir}/out/test/SimpleDiary"/>
+  
+  <path id="simplediary.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="simplediary.module.production.classpath">
+    <path refid="${module.jdk.classpath.simplediary}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="simplediary.runtime.production.module.classpath">
+    <pathelement location="${simplediary.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="simplediary.module.classpath">
+    <path refid="${module.jdk.classpath.simplediary}"/>
+    <pathelement location="${simplediary.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  <path id="simplediary.runtime.module.classpath">
+    <pathelement location="${simplediary.testoutput.dir}"/>
+    <pathelement location="${simplediary.output.dir}"/>
+    <path refid="library.commons-io-2.5.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.simplediary">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.simplediary">
+    <patternset refid="excluded.from.module.simplediary"/>
+  </patternset>
+  
+  <path id="simplediary.module.sourcepath">
+    <dirset dir="${module.simplediary.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.simplediary" depends="compile.module.simplediary.production,compile.module.simplediary.tests" description="Compile module SimpleDiary"/>
+  
+  <target name="compile.module.simplediary.production" depends="register.custom.compilers" description="Compile module SimpleDiary; production classes">
+    <mkdir dir="${simplediary.output.dir}"/>
+    <javac2 destdir="${simplediary.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.simplediary}/javac">
+      <compilerarg line="${compiler.args.simplediary}"/>
+      <bootclasspath refid="simplediary.module.bootclasspath"/>
+      <classpath refid="simplediary.module.production.classpath"/>
+      <src refid="simplediary.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.simplediary"/>
+    </javac2>
+    
+    <copy todir="${simplediary.output.dir}">
+      <fileset dir="${module.simplediary.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.simplediary.tests" depends="register.custom.compilers,compile.module.simplediary.production" description="compile module SimpleDiary; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.simplediary" description="cleanup module">
+    <delete dir="${simplediary.output.dir}"/>
+    <delete dir="${simplediary.testoutput.dir}"/>
+  </target>
+</project>
