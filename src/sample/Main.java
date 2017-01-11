@@ -61,7 +61,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         root = new BorderPane();
         root.setTop(horizontalBox());
-        
+
         root.setBottom(infoBox = new Text());
         primaryStage.setTitle("My Simple Secret Diary");
         Scene scene = new Scene(root,1000,580);
@@ -232,7 +232,7 @@ public class Main extends Application {
             }
         });
         newFile.setStyle("-fx-text-fill: deepskyblue ;");
-        newFile.setDisable(true);
+        newFile.setDisable(false);
         hBox.getChildren().add(newFile);
 
         Button load = new Button("LOAD DIARY");
