@@ -3,7 +3,10 @@ A simple diary program created using Java Fx. Let's you take and keep notes base
 
 ![capture](https://cloud.githubusercontent.com/assets/10364371/21837049/1585b680-d7d2-11e6-84f3-1b6219f028b7.PNG)
 
-DOWNLOAD LINK
+DOWNLOAD LINK  
+https://github.com/Ossobuko/MySimpleDiary/raw/master/My%20Simple%20DIary.jar
+
+INSTALLER DOWNLOAD LINK   
 https://github.com/Ossobuko/MySimpleDiary/raw/master/My%20Simple%20DIary.jar
 
 1. Load an existing or create a new diary.
